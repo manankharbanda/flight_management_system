@@ -1,0 +1,46 @@
+﻿@model FlightManagementSystem.Models.AddAirport
+@{
+    ViewBag.Title = "Add Airport";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.AirportId)
+                @Html.TextBoxFor(m => m.AirportId)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Country)
+                @Html.TextBoxFor(m => m.Country)
+            </li>
+        </ol>
+        <input type="submit" value="Add" onclick="myFunction()" />
+    </fieldset>
+}
+
+<script>
+    function myFunction() {
+        alert("Airport Added Successfully");
+   }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

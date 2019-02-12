@@ -1,0 +1,53 @@
+﻿@model FlightManagementSystem.Models.AddFlights
+@{
+    ViewBag.Title = "UpdateFlight";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.FlightId)
+                @Html.TextBoxFor(m => m.FlightId, new { @Value = ViewBag.flightid, @readonly = "readonly", Style = "background:#cccccc;" })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PlaneID)
+                @Html.TextBoxFor(m => m.PlaneID, new { @Value = ViewBag.planeid })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Date)
+                @Html.TextBoxFor(m => m.Date, new { @Value = ViewBag.Date })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Time)
+                @Html.TextBoxFor(m => m.Time, new { @Value = ViewBag.Time })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.SeatsAvailable)
+                @Html.TextBoxFor(m => m.SeatsAvailable, new { @Value = ViewBag.seatsavailable })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Price)
+                @Html.TextBoxFor(m => m.Price, new { @Value = ViewBag.Price })
+            </li>
+        </ol>
+        <input type="submit" value="Update Flight" onclick="myFunction()"/>
+    </fieldset>
+}
+<script>
+    function myFunction() {
+        alert("Flight Updated Successfully");
+   }
+</script>
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    }

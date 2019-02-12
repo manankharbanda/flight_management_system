@@ -1,0 +1,63 @@
+﻿@using FlightManagementSystem.Models
+
+@model Passenger
+@{
+    ViewBag.Title = "Flight Booking Details";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.EMail)
+                @Html.TextBoxFor(m => m.EMail)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.DOB)
+                @Html.TextBoxFor(m => m.DOB)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PhoneNum)
+                @Html.TextBoxFor(m => m.PhoneNum)
+            </li>
+            <li>
+                @Html.Label("Flight Class")
+                @Html.DropDownList("StudentGender",
+                    new SelectList(Enum.GetValues(typeof(FlightClass))),
+                    "Select Flight Class",
+                    new { @class = "form-control" })
+            </li>
+            <li>@Html.HiddenFor(m => m.AmountPaid)</li>
+        </ol>
+        <input type="submit" value="Book Flight" onclick="myFunction()"/>
+    </fieldset>
+}
+<script>
+    function myFunction() {
+        alert("Booking Successful");
+   }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

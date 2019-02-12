@@ -1,0 +1,64 @@
+﻿@model FlightManagementSystem.Models.AddPlane
+@{
+    ViewBag.Title = "Add Plane";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.PlaneID)
+                @Html.TextBoxFor(m => m.PlaneID)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Model)
+                @Html.TextBoxFor(m => m.Model)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Manufacturer)
+                @Html.TextBoxFor(m => m.Manufacturer)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.SeatCapacity)
+                @Html.TextBoxFor(m => m.SeatCapacity)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Age)
+                @Html.TextBoxFor(m => m.Age)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.LastMaintenanceOn)
+                @Html.TextBoxFor(m => m.LastMaintenanceOn)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NextMaintenanceOn)
+                @Html.TextBoxFor(m => m.NextMaintenanceOn)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Maintenance_Comments)
+                @Html.TextBoxFor(m => m.Maintenance_Comments)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.EmployeeIdManatainace)
+                @Html.TextBoxFor(m => m.EmployeeIdManatainace)
+            </li>
+        </ol>
+        <input type="submit" value="Add" onclick="myFunction()"/>
+    </fieldset>
+}
+<script>
+    function myFunction() {
+        alert("Plane Added Successfully");
+   }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

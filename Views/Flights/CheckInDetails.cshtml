@@ -1,0 +1,141 @@
+﻿@model FlightManagementSystem.Models.Passenger
+@{
+    ViewBag.Title = "CheckIn Details";
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+<ol>
+    <li>
+        <label for="FirstName">First Name</label>
+        <input id="FirstName" type="text">
+        <label for="LastName">Last Name</label>
+        <input id="LastName" type="text">
+        <label for="FlightID">Flight ID</label>
+        <input id="FlightID" type="text">
+        <button id="getFlightsstatus">Get Flight Status</button>
+    </li>
+</ol>
+
+    @if (ViewBag.checkIndetails != null)
+    {
+        <table id="t01" width="320" border="1">
+            <thead>
+            <th>Flight ID</th>
+            <th>Plane ID</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Flight Date</th>
+            <th>Flight Time</th>
+            <th>Is Checked In</th>
+            <th>Check In</th>
+            </thead>
+            @foreach (var item in ViewBag.checkIndetails)
+            {
+
+                <tr>
+                    <td class="ui-tabs-hide">
+                        @item.FlightId
+                    </td>
+                    <td>
+                        @item.PlaneID
+                    </td>
+                    <td>
+                        @item.OriginName ,
+                        @item.OriginCity ,
+                        @item.OriginCountry
+                    </td>
+                    <td>
+                        @item.DestName ,
+                        @item.DestCity ,
+                        @item.DestCountry
+                    </td>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        @item.Time
+                    </td>
+                        @if (@item.IsCheckedIn == 0) 
+                        { 
+                           <td> No</td>
+                        }
+                        else
+                        {
+                            <td> Yes</td>
+                        }
+                    <td>
+                        <button class="CheckIn">Check In</button>
+                    </td>
+                    <td style="display:none">
+                        @item.CustomerId
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    }
+    <style>
+        table#t01 {
+            width: 100%;
+            background-color: #f1f1c1;
+        }
+
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+
+            table#t01 tr:nth-child(odd) {
+                background-color: #fff;
+            }
+
+            table#t01 th {
+                color: white;
+                background-color: blue;
+            }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        //function GetFlights(date) {
+        // window.location.href = "GetFlights?date=" + date;
+        // $.get("/Flights/FlightStatus", { date: date }, function () {
+        //var a = document.getElementById('t01').innerHTML;
+        //var query = '<table id="t01" width="320" border="1"><thead><th>UserID</th><th>Username</th><th>Password</th><th>FullName</th><th>EmailID</th></thead>'+ foreach(var item in ViewBag.userdetails){+ '<tr><td>'+item.PlaneID+'</td><td>'item.Date'</td><td>'item.Time'</td><td>'item.SeatsAvailable'</td><td>'item.Price'</td></tr>'}'</table>'
+        //$('#table').appendChild(a);
+        //});
+        //}
+
+        $('#getFlightsstatus').off("click")
+        $('#getFlightsstatus').on("click", function () {
+            debugger;
+            var flightid = $('#FlightID').val();
+            var Fname = $('#FirstName').val();
+            var Lname = $('#LastName').val();
+            window.location.href = "CheckInDetails?flightid=" + flightid + "&Fname=" + Fname + "&Lname=" + Lname;
+        });
+
+        $('.CheckIn').on("click", function () {
+            var trRef = $(this).parent().parent();
+            var flightid = trRef.children()[0].innerText;
+            var custid = trRef.children()[8].innerText;
+            window.location.href = "SaveCheckIn?flightid=" + flightid + "&custid=" + custid;
+        });
+    </script>

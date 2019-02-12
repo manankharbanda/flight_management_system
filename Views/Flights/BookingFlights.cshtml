@@ -1,0 +1,166 @@
+﻿@model FlightManagementSystem.Models.Passenger
+@{
+    ViewBag.Title = "Booking Flights";
+    var update = ViewBag.updated;
+}
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+<ol>
+    <li>
+        <label for="date">Enter Date</label>
+        <input id="datetxt" type="text">
+        <button id="getFlights">Search Flight</button>
+    </li>
+    </ol>
+        @if (ViewBag.userdetails != null)
+        {
+            <table id="t01" width="320" border="1">
+                <thead>
+                <th>Flight ID</th>
+                <th>Plane ID</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Flight Date</th>
+                <th>Flight Time</th>
+                <th>Seats Available</th>
+                <th>Price</th>
+                <th>Book</th>
+                <th class="update">Update</th>
+                </thead>
+                @foreach (var item in ViewBag.userdetails)
+                {
+
+                    <tr>
+                        <td class="ui-tabs-hide">
+                            @item.FlightId
+                        </td>
+                        <td>
+                            @item.PlaneID
+                        </td>
+                        <td>
+                            @item.OriginName ,
+                            @item.OriginCity ,
+                            @item.OriginCountry
+                        </td>
+                        <td>
+                            @item.DestName ,
+                            @item.DestCity ,
+                            @item.DestCountry
+                        </td>
+                        <td>
+                            @item.Date
+                        </td>
+                        <td>
+                            @item.Time
+                        </td>
+                        <td>
+                            @item.SeatsAvailable
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            <button class="bookflight">Book Flight</button>
+                        </td>
+                        <td class="update">
+                            <button class="updateflight">Update Flight</button>
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+        }
+        <style>
+            table#t01 {
+                width: 100%;
+                background-color: #f1f1c1;
+            }
+
+                table#t01 tr:nth-child(even) {
+                    background-color: #eee;
+                }
+
+                table#t01 tr:nth-child(odd) {
+                    background-color: #fff;
+                }
+
+                table#t01 th {
+                    color: white;
+                    background-color: blue;
+                }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 15px;
+            }
+        </style>
+        <script type="text/javascript">
+            if ($('.username').text() == 'customer') {
+                $(".update").hide();
+            }
+            //function GetFlights(date) {
+            // window.location.href = "GetFlights?date=" + date;
+            // $.get("/Flights/FlightStatus", { date: date }, function () {
+            //var a = document.getElementById('t01').innerHTML;
+            //var query = '<table id="t01" width="320" border="1"><thead><th>UserID</th><th>Username</th><th>Password</th><th>FullName</th><th>EmailID</th></thead>'+ foreach(var item in ViewBag.userdetails){+ '<tr><td>'+item.PlaneID+'</td><td>'item.Date'</td><td>'item.Time'</td><td>'item.SeatsAvailable'</td><td>'item.Price'</td></tr>'}'</table>'
+            //$('#table').appendChild(a);
+            //});
+            //}
+
+            $('#getFlights').off("click")
+            $('#getFlights').on("click", function () {
+                var date = $('#datetxt').val();
+                window.location.href = "GetFlights?date=" + date;
+            });
+
+            $('.bookflight').on("click", function () {
+                var trRef = $(this).parent().parent();
+                var flightid = trRef.children()[0].innerText;
+                var price = trRef.children()[7].innerText;
+                var Date = trRef.children()[4].innerText;
+                window.location.href = "FlightBookingDetails?flightid=" + flightid + "&price=" + price;
+            });
+
+            $('.updateflight').on("click", function () {
+                var trRef = $(this).parent().parent();
+                var flightid = trRef.children()[0].innerText;
+                var Date = trRef.children()[4].innerText;
+                var Time = trRef.children()[5].innerText;
+                var SeatsAvailable = trRef.children()[6].innerText;
+                var PlaneId = trRef.children()[1].innerText;
+                var Price = trRef.children()[7].innerText;
+                //var updateflight = {
+                //    FlightId: flightid,
+                //    Date: Date,
+                //    Time: Time,
+                //    SeatsAvailable: SeatsAvailable,
+                //    PlaneID: PlaneId,
+                //}
+
+                //$.post("/Flights/UpdateFlight", updateflight, function () {
+                //    alert("updated");
+                // });
+                window.location.href = "UpdateFlight?flightid=" + flightid + "&Date=" + Date + "&Time=" + Time + "&SeatsAvailable=" + SeatsAvailable + "&PlaneId=" + PlaneId + "&Price=" + Price;
+                myFunction();
+            });
+            @*debugger;
+        if (@ViewBag.updated)
+            alert("updated successfully")
+        else
+            ViewBag.updated = false;*@
+        </script>

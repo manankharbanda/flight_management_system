@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./javascript.js"></script>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/theme.css")
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title float-left">@Html.ActionLink("SEAMless Airlines", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <div class="tab">
+            <button class="tablinks Admin" onclick="openCity(event, 'AddAirport')">Add Airport</button>
+            <button class="tablinks Admin" onclick="openCity(event, 'AddPlane')">Add Plane</button>
+            <button class="tablinks Admin" onclick="openCity(event, 'AddFlight')">Add Flight</button>
+            <button class="tablinks" onclick="openCity(event, 'Book')">Book flight</button>
+            <button class="tablinks" onclick="openCity(event, 'CheckIn')">Check In</button>
+        </div>
+
+        <div id="AddPlane" class="tabcontent">
+            <h3>Add Plane</h3>
+            <p>London is the capital city of England.</p>
+        </div>
+        <div id="AddFlight" class="tabcontent">
+            <h3>Add Flight</h3>
+            <p>London is the capital city of England.</p>
+        </div>
+
+        <div id="Book" class="tabcontent">
+            <h3>Book flight</h3>
+            <p>Paris is the capital of France.</p>
+        </div>
+
+        <div id="Status" class="tabcontent">
+            <h3>Flight Status</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+        <div id="CheckIn" class="tabcontent">
+            <h3>Check In</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - SEAMless Airlines</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script type="text/javascript">
+    if($('.username').text() == 'customer')
+    {
+        $(".Admin").hide();
+    }
+        function openCity(evt, Page) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        //document.getElementById(Page).style.display = "block";
+        if (Page == "AddAirport")
+            window.location.href = "@Url.Action("AddAirport", "Flights")";
+        if (Page == "AddFlight")
+            window.location.href = "@Url.Action("AddFlight", "Flights")";
+        if (Page == "AddPlane")
+            window.location.href = "@Url.Action("AddPlane", "Flights")";
+        if (Page == "Book")
+            window.location.href = "@Url.Action("BookingFlights", "Flights")";
+        if (Page == "CheckIn")
+            window.location.href = "@Url.Action("CheckIn", "Flights")";
+        evt.currentTarget.className += " active";
+    }
+   </script>
